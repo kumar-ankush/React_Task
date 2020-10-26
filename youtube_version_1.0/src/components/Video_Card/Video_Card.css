@@ -1,0 +1,131 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
+.videocard {
+	/* border: 1px solid blue; */
+	flex: 0.25;
+	/* max-height: 250px; */
+	/* height: 20vh; */
+	/* max-width: 215px; */
+	/* min-width: 15vw; */
+	/* min-width: 40%; */
+	/* margin-right: 10px; */
+	margin-left: 20px;
+	margin-bottom: 10px;
+	/* flex-wrap: wrap; */
+	/*flex-direction: column; */
+}
+.videocard__Thumbnail {
+	width: 100%;
+	/* max-width: 20vw; */
+	/* min-width: 30vw; */
+	/* width: 17vw; */
+	/* width: 15vw;
+	
+	border: 2px dotted yellow; */
+	/* min-width: 80%; */
+	/* height: 140px;
+	width: 30vw; */
+}
+.videoCard__info {
+	display: flex;
+	margin-top: 12px;
+}
+.videoCard__infoText {
+	flex: 1;
+	text-align: left;
+	margin-left: 12px;
+}
+.videoCard__title {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 6px;
+}
+.videoCard__noOfViewspostedDate {
+	font-size: 14px;
+	color: #606060;
+}
+.videoCard__channelName {
+	font-size: 14px;
+	color: #606060;
+}
+.videoCard__ImageContainer {
+	height: 36px;
+	width: 36px;
+	border-radius: 50%;
+	/* border: 1px solid red; */
+	overflow: hidden;
+}
+
+.videoCard__ImageContainer > img {
+	width: 100%;
+}
+@media screen and (max-width: 900px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		height: 140px;
+		width: 30vw;
+		/* width: 250px; */
+	}
+}
+@media screen and (max-width: 710px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		margin-top: 10px;
+		height: 60vh;
+		width: 65vw;
+
+		/* width: 250px; */
+	}
+}
+@media screen and (max-width: 671px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		height: 50vh;
+		width: 60vw;
+
+		/* width: 250px; */
+	}
+}
+@media screen and (max-width: 600px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		height: 50vh;
+		width: 60vw;
+
+		/* width: 250px; */
+	}
+}
+@media screen and (max-width: 560px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		height: 40vh;
+		width: 50vw;
+
+		/* width: 250px; */
+	}
+}
+@media screen and (max-width: 450px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		height: 35vh;
+		width: 45vw;
+
+		/* width: 250px; */
+	}
+}
+@media screen and (max-width: 400px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		height: 25vh;
+		width: 40vw;
+
+		/* width: 250px; */
+	}
+}
+@media screen and (max-width: 200px) {
+	.image__Thumbnail .videocard__Thumbnail {
+		height: 20vh;
+		width: 39vw;
+
+		/* width: 250px; */
+	}
+}
