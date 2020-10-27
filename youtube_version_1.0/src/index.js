@@ -9,17 +9,19 @@ import Main_Container from './components/Main_Container/Main_Container';
 import Side_Bar from './components/Side_Bar/Side_Bar';
 
 import Trending_index from './components/Trending/Trending_index';
+import Subs_Container from './components/Subs_Container/Subs_Container';
 ReactDOM.render(
   <React.StrictMode>
-    <div className="App">
+    {/* <div className="App">
       <Header/>
         <div className="App__page">
         <Side_Bar />
-          <Main_Container />
-        </div>
-    
-    </div>
+          <Main_Container 
+          Container__Title="Recommended"/>
+        </div> 
+    </div> */}
     {/* <Trending_index /> */}
+    <Subs_Container />
   </React.StrictMode>,
   document.getElementById('root')
 );

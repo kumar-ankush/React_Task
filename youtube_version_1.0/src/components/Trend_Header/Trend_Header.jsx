@@ -8,7 +8,7 @@ const Trend_Header = (props) => {
                 <img src="https://www.youtube.com/img/trending/chips/music_80x80.png" alt=""/>
                 <h6>Music</h6>
             </div>
-            <hr/>
+           
             <div className="sec-1">
             <img src="https://www.youtube.com/img/trending/chips/gaming_80x80.png" alt=""/>
                 <h6>Gaming</h6>            

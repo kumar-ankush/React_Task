@@ -1,4 +1,5 @@
 .Side_Bar {
 	border: 1px solid black;
-	flex: 0.2;
+	/* flex: 0.2; */
+	width: 19vw;
 }
