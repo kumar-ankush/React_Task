@@ -1,5 +1,14 @@
 .Side_Bar {
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	/* flex: 0.2; */
-	width: 19vw;
+	width: 17vw !important;
+	/* width: 190px !important; */
+	margin-top: 0.4vh;
+}
+.Side_Bar > hr {
+	height: 1px;
+	border: 0;
+	background-color: lightgray;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

@@ -15,4 +15,5 @@
 .sec-1 > h6 {
 	text-align: center;
 	font-size: 0.75rem;
+	/* border: 1px solid black; */
 }

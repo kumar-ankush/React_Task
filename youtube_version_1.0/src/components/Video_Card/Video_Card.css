@@ -15,7 +15,7 @@ p {
 	/* min-width: 15vw; */
 	/* min-width: 40%; */
 	/* margin-right: 10px; */
-	margin-left: 20px;
+
 	margin-bottom: 10px;
 	/* flex-wrap: wrap; */
 	/*flex-direction: column; */
@@ -32,6 +32,11 @@ p {
 	/* height: 140px;
 	width: 30vw; */
 }
+#videocard__Thumbnail {
+	width: 18vw;
+	height: 25vh;
+	/* object-fit: contain; */
+}
 .videoCard__info {
 	display: flex;
 	margin-top: 12px;
@@ -39,15 +44,16 @@ p {
 .videoCard__infoText {
 	flex: 1;
 	text-align: left;
-	margin-left: 12px;
+	margin-left: 8px;
+	/* border: 1px solid black; */
 }
 .videoCard__title {
-	font-size: 14px;
+	font-size: 0.8rem;
 	font-weight: bold;
-	margin-bottom: 6px;
+	margin-bottom: 2px;
 }
 .videoCard__noOfViewspostedDate {
-	font-size: 14px;
+	font-size: 12px;
 	color: #606060;
 }
 .videoCard__channelName {
@@ -65,67 +71,63 @@ p {
 .videoCard__ImageContainer > img {
 	width: 100%;
 }
+@media screen and (max-width: 992px) {
+	.videoCard__title {
+		font-size: 0.7rem;
+	}
+	.videoCard__channelName .videoCard__noOfViewspostedDate {
+		font-size: 0.8rem;
+	}
+}
+
 @media screen and (max-width: 900px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		height: 140px;
 		width: 30vw;
-		/* width: 250px; */
 	}
 }
-@media screen and (max-width: 710px) {
+@media screen and (max-width: 767px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		margin-top: 10px;
 		height: 60vh;
-		width: 65vw;
-
-		/* width: 250px; */
+		/* width: 35vw !important; */
+		width: 280px !important;
+		/* object-fit: contain; */
 	}
 }
-@media screen and (max-width: 671px) {
+@media screen and (max-width: 665px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		height: 50vh;
-		width: 60vw;
-
-		/* width: 250px; */
+		width: 250px !important;
 	}
 }
 @media screen and (max-width: 600px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		height: 50vh;
 		width: 60vw;
-
-		/* width: 250px; */
 	}
 }
 @media screen and (max-width: 560px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		height: 40vh;
 		width: 50vw;
-
-		/* width: 250px; */
 	}
 }
 @media screen and (max-width: 450px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		height: 35vh;
 		width: 45vw;
-
-		/* width: 250px; */
 	}
 }
 @media screen and (max-width: 400px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		height: 25vh;
 		width: 40vw;
-
-		/* width: 250px; */
 	}
 }
 @media screen and (max-width: 200px) {
 	.image__Thumbnail .videocard__Thumbnail {
 		height: 20vh;
 		width: 39vw;
-
-		/* width: 250px; */
 	}
 }

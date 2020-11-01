@@ -10,18 +10,29 @@ import Side_Bar from './components/Side_Bar/Side_Bar';
 
 import Trending_index from './components/Trending/Trending_index';
 import Subs_Container from './components/Subs_Container/Subs_Container';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
-    {/* <div className="App">
+ <BrowserRouter> {/*// You have to wrap everything inside the Browser Router to make it work rouitng */}
+    <div className="App">
       <Header/>
         <div className="App__page">
-        <Side_Bar />
-          <Main_Container 
-          Container__Title="Recommended"/>
+        <Side_Bar id={Math.random()*1000}/>
+       
+        <Switch>
+            <Route path="/" exact component={Main_Container} />
+            <Route path="/trend-index/:id" component={Trending_index} />
+            <Route path="/subs/:id" component={Subs_Container } />
+           
+          </Switch>
+         
+          {/* <Main_Container 
+          Container__Title="Recommended"/> */}
         </div> 
-    </div> */}
+    </div>
+    </BrowserRouter>
     {/* <Trending_index /> */}
-    <Subs_Container />
+    {/* <Subs_Container /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
