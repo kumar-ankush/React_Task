@@ -1,0 +1,43 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.Card_Container {
+	/* display: flex !important;
+	align-items: center !important;
+	justify-content: center !important; */
+	position: relative;
+	left: 100%;
+	top: 5vh;
+}
+
+#Google_img {
+	width: 60px !important;
+	height: 100px !important;
+}
+.card_info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* border: 1px solid black; */
+}
+.h6_tag {
+	font-size: 0.8rem;
+	font-weight: 500;
+}
+.h5_info {
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+.typo {
+	/* padding-bottom: 10px; */
+	text-align: center;
+	/* border: 1px solid palevioletred; */
+}
+#button_submit {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
