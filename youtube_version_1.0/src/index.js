@@ -17,27 +17,26 @@ import LoginForm from './components/LoginForm/LoginForm';
 
 ReactDOM.render(
   <React.StrictMode> {/*// You have to wrap everything inside the Browser Router to make it work rouitng */}
-  <div className="App">
-    {/* <Login_Container /> */}
-   <LoginForm />
-  </div>
- {/* <BrowserRouter> 
+   {/* <div className="App">
+    
+    <LoginForm />
+  </div> */}
+ <BrowserRouter> 
     <div className="App">
       <Header/>
         <div className="App__page">
         <Side_Bar id={Math.random()*1000}/>
-       
          <Switch>
             <Route path="/" exact component={Main_Container} />
             <Route path="/trend-index/:id" component={Trending_index} />
             <Route path="/subs/:id" component={Subs_Container } />
-           
+            <Route path="/login" component={LoginForm} />
           </Switch> 
          
          
         </div> 
     </div>
-    </BrowserRouter> */}
+    </BrowserRouter>
     {/* <Trending_index /> */}
     {/* <Subs_Container /> */}
   </React.StrictMode>,

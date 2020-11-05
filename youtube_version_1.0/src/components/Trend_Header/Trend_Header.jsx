@@ -23,7 +23,7 @@ const Trend_Header = (props) => {
             </div>
             <div className="sec-1">
             <img src="https://www.youtube.com/img/trending/chips/fashion_80x80.png" alt=""/>
-                <h6>Fashion 
+                <h6 id="fashion">Fashion 
                     and
                     Beauty</h6>
             </div>

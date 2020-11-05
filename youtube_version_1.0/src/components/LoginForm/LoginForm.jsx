@@ -3,8 +3,10 @@ import { Form, Button } from "react-bootstrap";
 import Card from '@material-ui/core/Card';
 import Alert from "react-bootstrap/Alert";
 import './LoginForm.css'
+import { withRouter } from 'react-router'
+import {  Redirect, Route } from "react-router-dom";
 class LoginForm extends Component {
-  state = { user: { email:"", password:"" }, errors: {} };
+  state = { user: { email:"", password:"" }, errors: {}, redirect:false };
   isValid = () => {
     console.log("Invalid working 1")
     const errors = {};
@@ -14,7 +16,7 @@ class LoginForm extends Component {
     if (this.state.user.password.trim() === "") {
       errors.password = "Invalid";
     }
-    return Object.keys(errors).length === 0 ? null : errors;
+    return Object.keys(errors).length === 0 ? "" : errors;
   };
 
   changeHandler = (event) => {
@@ -30,13 +32,43 @@ class LoginForm extends Component {
     this.setState({ errors });
     console.log("State");
     console.log(this.state);
+   
     if (errors) return;
+    if(this.state.user.email !=="" && this.state.user.password !==""){
+      const redirect=true;
+      this.setState({redirect:true},()=>{
+        this.renderHandler();
+        console.log(this.state.redirect)
+      })
+      // console.log(this.state)
+      // console.log("Set State Worked");
+      
+     
+    }
+    console.log(this.state)
     console.log("Call the Server");
-  };
+    // window.location.href="/";
+    // window.location.href="/"+"?email="+this.state.user.email+"pwd="+this.state.user.password;
+  }
+  
+  renderHandler=(props)=>{
+    // console.log("Render Handler worked");
+    // const data= this.state.redirect;
+    console.log("State before check redirect")
+    console.log(this.state.redirect);
+    // window.location.href="/"+"?email="+this.state.user.email+"pwd="+this.state.user.password;
+                  if(this.state.redirect===true){
+                    console.log("Render If working")
+                  //  return this.props.history.push(`/${this.state.user.email&&this.state.user.password}`);
+                          // return <Redirect to={`/${this.state.user.email&&this.state.user.password}`} />   
+                          window.location.href="/"+"?email="+this.state.user.email+"pwd="+this.state.user.password;}            
+              
+}
+ 
   render() {
     return (
-      <div>
         <Form onSubmit={this.submitHandler}>
+        <div className="Card_Container">
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -66,10 +98,8 @@ class LoginForm extends Component {
           <Button variant="primary" type="submit">
             Login
           </Button>
+          </div>
         </Form>
-       
-       
-      </div>
     );
   }
 }

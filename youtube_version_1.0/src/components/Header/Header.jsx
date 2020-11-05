@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 // import { Input } from '@material-ui/core';
+import { Link } from "react-router-dom";
 import { TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { Button } from '@material-ui/core';
@@ -37,7 +38,9 @@ const Header = () => {
             <VideoCallIcon color="action" />
             <AppsIcon className="right__AppsIcon" color="action" />
             <NotificationsIcon className="right__NotificationsIcon" color="action"/>
+            <Link to={`/login`}>
             <Avatar className="righticons__Avatar" src="https://maxcdn.icons8.com/Share/icon/Cultures/ninja_head_filled1600.png"/>
+            </Link>
             {/* <div class="btn-group">
   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Right-aligned menu
