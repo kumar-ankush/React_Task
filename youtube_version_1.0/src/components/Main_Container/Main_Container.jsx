@@ -88,7 +88,8 @@ const Main_Container = (props) => {
     return (
 
         <div className="Recomended_Container">
-            <h4 className="Main_Container__title">{props.Container__Title}</h4>
+            {/* <h4 className="Main_Container__title">{props.Container__Title}</h4> */}
+            <h4 className="Main_Container__title">"Hello"</h4>
         <div className="recomended__Videos">
             <Row xs="4">
             {state.items.map(x => {

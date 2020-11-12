@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import Card from '@material-ui/core/Card';
 import Alert from "react-bootstrap/Alert";
 import './LoginForm.css'
+import { connect } from "react-redux";
 import { withRouter } from 'react-router'
 import {  Redirect, Route } from "react-router-dom";
 class LoginForm extends Component {
@@ -21,7 +22,7 @@ class LoginForm extends Component {
 
   changeHandler = (event) => {
     const user = { ...this.state.user };
-    user[event.target.name] = event.currentTarget.value;
+    user[event.target.name] = event.currentTarget.value; //Tried this one using Redux for email and password lets see what i can do with it.
     this.setState({ user });
   };
 
@@ -29,7 +30,7 @@ class LoginForm extends Component {
     event.preventDefault();
     const errors = this.isValid();
     console.log(errors);
-    this.setState({ errors });
+    this.setState({ errors }); //Done till here
     console.log("State");
     console.log(this.state);
    
@@ -67,13 +68,20 @@ class LoginForm extends Component {
  
   render() {
     return (
-        <Form onSubmit={this.submitHandler}>
+        <Form onSubmit={this.submitHandler}> 
         <div className="Card_Container">
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control
+            {/* <Form.Control
               value={this.state.user.email}
               onChange={this.changeHandler}
+              name="email"
+              type="email"
+              placeholder="Enter email"
+            /> */}
+          <Form.Control
+              value={this.props.email}
+              onChange={this.props.changeHandlerMail}
               name="email"
               type="email"
               placeholder="Enter email"
@@ -84,14 +92,24 @@ class LoginForm extends Component {
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control
+            {/* <Form.Control
               value={this.state.user.password}
               onChange={this.changeHandler}
               name="password"
               type="password"
               placeholder="Password"
+            /> */}
+
+            {/* The changed Start here redux */}
+            <Form.Control
+              value={this.props.password}
+              onChange={this.props.changeHandlerPass}
+              name="password"
+              type="password"
+              placeholder="Password"
             />
-            {this.state.errors.password && (
+         
+             {this.state.errors.password && (
               <Alert variant="danger">{this.state.errors.password}</Alert>
             )}
           </Form.Group>
@@ -103,5 +121,14 @@ class LoginForm extends Component {
     );
   }
 }
-
-export default LoginForm;
+const mapStateToProps=(state)=>{
+return {email: state.user.email,
+password: state.user.password}
+}
+const mapDispatchToProps = (dispath) => {
+return{
+  changeHandlerMail: ()=>dispath({type:"Email"}),
+  changeHandlerPass: ()=>dispath({type:"Password"})
+}
+}
+export default connect (mapStateToProps,mapDispatchToProps)(LoginForm);

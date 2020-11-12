@@ -14,13 +14,17 @@ import Subs_Container from './components/Subs_Container/Subs_Container';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login_Container from './components/Login_Container/Login_Container';
 import LoginForm from './components/LoginForm/LoginForm';
-
+import { createStore } from "redux";
+import reducer from "./Store/Reducer";
+import { Provider } from "react-redux";
+const store = createStore(reducer);
 ReactDOM.render(
   <React.StrictMode> {/*// You have to wrap everything inside the Browser Router to make it work rouitng */}
    {/* <div className="App">
     
     <LoginForm />
   </div> */}
+  <Provider store={store}>
  <BrowserRouter> 
     <div className="App">
       <Header/>
@@ -37,6 +41,7 @@ ReactDOM.render(
         </div> 
     </div>
     </BrowserRouter>
+    </Provider>
     {/* <Trending_index /> */}
     {/* <Subs_Container /> */}
   </React.StrictMode>,
