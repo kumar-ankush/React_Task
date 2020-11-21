@@ -10,11 +10,10 @@ const initialState={
     {id:Math.random()*1000 },
     {id:Math.random()*1000}],
     //
-    com:[{id:Math.random()*1000, value:"Select"},{id:Math.random()*1000, value:"Apple"},
-    {id:Math.random()*1000, value:"Oneplus"},{id:Math.random()*1000, value:"Nokia"},
-    {id:Math.random()*1000, value:"Samsung"}],
+    com:[{id:Math.random()*10000000, value:"Select"},{id:Math.random()*1000, value:"Apple"},
+    {id:Math.random()*10000000, value:"Oneplus"},{id:Math.random()*1000, value:"Nokia"},
+    {id:Math.random()*10000000, value:"Samsung"}],
     //
-    company:["Select","Apple","Oneplus","Nokia","Samsung"],
     // Organisation:[{id:Math.random()*1000,company:["Apple","Oneplus"] },
     // {id:Math.random()*1000,company:["Apple","Oneplus"]}],
     // vendor:[{id:Math.random()*1000, firm:["Apple","OnePlus"],Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],

@@ -7,62 +7,13 @@ class ItemsNeededCard extends Component {
         super(props);
         this.state={information:"",apple:[],oneplus:[],Nokia:[],Samsung:[],list:["Select","Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"]}
         this.handleSelect = this.handleSelect.bind(this);
-        // this.AppleHandler=this.AppleHandler.bind(this);
-        // this.OneplusHandler=this.OneplusHandler.bind(this);
       }
       handleSelect=(event)=>{
         // console.log("The Event value is "+event.target.value);
-          this.setState({information:event.target.value});
-        // console.log("The state value is: "+this.state.information);
+        this.setState({information:event.currentTarget.value});
+        console.log("The state information value is: "+this.state.information);
         switch(event.target.value)
         {
-            // case "Apple": console.log("Working a")
-            //         var arr=[]
-            //         this.props.steve.map((value)=>{
-            //               arr.push(value);    
-            //         })
-            //         console.log("The arr is "+arr);
-            //         this.setState({list:[...arr]})
-            //       console.log("The Apple is"+this.state.apple)
-            //       break;
-            // case "Oneplus":console.log("Working b");
-            //     console.log("Working OnePlus");
-            //     var arr1=[]
-            //       this.props.nord.map((value)=>{
-            //             arr1.push(value);
-                        
-            //       })
-            //       console.log("The arr1 is "+arr1);
-            //       this.setState({list:[...arr1]})
-            //       console.log("The Oneplus is"+this.state.oneplus)
-            //       break;
-            // case "Nokia":console.log("Working c");
-            // console.log("Working OnePlus");
-            // var arr=[]
-            //   this.props.nord.map((value)=>{
-            //         arr.push(value);
-                    
-            //   })
-            //   console.log("The arr1 is "+arr);
-            //   this.setState({list:[...arr]})
-            //   console.log("The Oneplus is"+this.state.Nokia)
-            //   break;
-            // case "Samsung": console.log("Working c");
-            // console.log("Working OnePlus");
-            // var arr=[]
-            //   this.props.nord.map((value)=>{
-            //         arr.push(value);
-                    
-            //   })
-            //   console.log("The arr1 is "+arr);
-            //   this.setState({list:[...arr]})
-            //   console.log("The Oneplus is"+this.state.Samsung)
-            //   break;
-            //   default: console.log("Wrong Choice")
-            //
-            //
-            //
-            //
             case "Apple": console.log("Working a")
                     var arr=[]
                     this.props.steve.map((value)=>{
@@ -70,7 +21,7 @@ class ItemsNeededCard extends Component {
                     })
                     console.log("The arr is "+arr);
                     this.setState({list:[...arr]})
-                  console.log("The Apple is"+this.state.list)
+                  console.log("The Apple is"+this.state.apple)
                   break;
             case "Oneplus":console.log("Working b");
                 console.log("Working OnePlus");
@@ -81,55 +32,80 @@ class ItemsNeededCard extends Component {
                   })
                   console.log("The arr1 is "+arr1);
                   this.setState({list:[...arr1]})
-                  console.log("The Oneplus is"+this.state.list)
+                  console.log("The Oneplus is"+this.state.oneplus)
                   break;
             case "Nokia":console.log("Working c");
             console.log("Working OnePlus");
-             arr=[]
+            var arr=[]
               this.props.nok.map((value)=>{
-                    arr.push(value); 
+                    arr.push(value);
+                    
               })
               console.log("The arr1 is "+arr);
               this.setState({list:[...arr]})
-              console.log("The Oneplus is"+this.state.list)
+              console.log("The Oneplus is"+this.state.Nokia)
               break;
-
             case "Samsung": console.log("Working c");
             console.log("Working OnePlus");
-            arr=[]
+            var arr=[]
               this.props.sam.map((value)=>{
                     arr.push(value);
                     
               })
               console.log("The arr1 is "+arr);
               this.setState({list:[...arr]})
-              console.log("The Oneplus is"+this.state.list)
+              console.log("The Oneplus is"+this.state.Samsung)
               break;
               default: console.log("Wrong Choice")
+            //
+            //
+            //
+            //
+            // case "Apple": console.log("Working a")
+            //         var arr=[]
+            //         this.props.steve.map((value)=>{
+            //               arr.push(value);    
+            //         })
+            //         console.log("The arr is "+arr);
+            //         this.setState({list:[...arr]})
+            //       console.log("The Apple is"+this.state.list)
+            //       break;
+            // case "Oneplus":console.log("Working b");
+            //     console.log("Working OnePlus");
+            //     var arr1=[]
+            //       this.props.nord.map((value)=>{
+            //             arr1.push(value);
+                        
+            //       })
+            //       console.log("The arr1 is "+arr1);
+            //       this.setState({list:[...arr1]})
+            //       console.log("The Oneplus is"+this.state.list)
+            //       break;
+            // case "Nokia":console.log("Working c");
+            // console.log("Working OnePlus");
+            //  arr=[]
+            //   this.props.nok.map((value)=>{
+            //         arr.push(value); 
+            //   })
+            //   console.log("The arr1 is "+arr);
+            //   this.setState({list:[...arr]})
+            //   console.log("The Oneplus is"+this.state.list)
+            //   break;
+
+            // case "Samsung": console.log("Working c");
+            // console.log("Working OnePlus");
+            // arr=[]
+            //   this.props.sam.map((value)=>{
+            //         arr.push(value);
+                    
+            //   })
+            //   console.log("The arr1 is "+arr);
+            //   this.setState({list:[...arr]})
+            //   console.log("The Oneplus is"+this.state.list)
+            //   break;
+            //   default: console.log("Wrong Choice")
         }
-    //     if(event.target.value=="Apple"){
-    //         console.log("Working a")
-    //         var arr=[]
-    //         this.props.steve.map((value)=>{
-    //               arr.push(value);    
-    //         })
-    //         console.log("The arr is "+arr);
-    //         this.setState({list:[...arr]})
-    //       console.log("The Apple is"+this.state.apple)
-    //         // this.AppleHandler()
-    //     }
-    //     else {console.log("Working b");
-    //     //  this.OneplusHandler()
-    //     console.log("Working OnePlus");
-    //     var arr1=[]
-    //       this.props.nord.map((value)=>{
-    //             arr1.push(value);
-                
-    //       })
-    //       console.log("The arr1 is "+arr1);
-    //       this.setState({list:[...arr1]})
-    //       console.log("The Oneplus is"+this.state.oneplus)      
-    // }
+   
       }
     
     render() {
@@ -210,25 +186,31 @@ class ItemsNeededCard extends Component {
                                             <td width="300">
                                             <Form.Group onChange={this.handleSelect} as={Col} md="10" controlId="exampleForm.SelectCustomSizeSm">
                                             <Form.Control  as="select" size="sm" custom>
-                                                {this.props.brand.map((val)=>(
-                                                    <option>{val}</option>
-                                                ))}
+                                                
+                                                {
+                                                    this.props.annoying.map((x)=>
+                                                        <option id={x.id} key={x.id}>{x.value}</option>
+                                                    )
+                                                }
                                             </Form.Control>
                                             </Form.Group>
                                             </td>
                                             <td width="540">
                                             <Form.Group as={Col} md="10" controlId="exampleForm.SelectCustomSizeSm">
                                             <Form.Control as="select" size="sm" custom>
-                                               {this.state.list.map((data)=>{
+                                               {/* {this.state.list.map((data)=>{
                                                    console.log(data);
                                                    return( <option>{data}</option>)
                                                     
-                                                   })}
-                                                   {/* {
-                                                       if(this.state.information){
-                                                           
-                                                       }
-                                                   } */}
+                                                   })} */}
+                                                     {
+                                                    this.state.information==="Apple"? this.state.apple.map(x=> <option >{x}</option>)
+                                                    :this.state.information==="Oneplus"?this.state.oneplus.map((x)=><option >{x}</option>)
+                                                    :this.state.information==="Nokia"?this.state.Nokia.map((x)=><option >{x}</option>)
+                                                    :this.state.information==="Samsung"?this.state.Samsung.map((x)=><option >{x}</option>)
+                                                    :console.log("Wrong Option")
+                                                    
+                                                }
                                             </Form.Control>
                                             </Form.Group>
                                             </td>
@@ -267,8 +249,7 @@ const mapStateToProps=(state)=>{
         nord:state.Oneplus,
         nok:state.Nokia,
         sam:state.Samsung,
-        brand:state.company,
-        
+        annoying:state.com,
        
     }
 }
