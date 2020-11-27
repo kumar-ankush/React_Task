@@ -37,25 +37,38 @@ class ItemsNeededCard extends Component {
                     var arr=[]
                     this.props.steve.map((value,i)=>{
                           arr.push(value);   
-                        //   console.log("The value of Loop arr is : "+arr[i]) 
-                          
                     })
                     // arr.map((x,i)=> (document.getElementById(`${i}`).innerHTML=x))
-                    console.log("The arr is "+arr);
+                    var arr1=[...this.state.vendor]
+                   arr1.map((x)=>{
+                       if(x.id == this.state.ID){
+                           x.test=arr;
+                           console.log("The x.test is "+x.test)
+                       }
+                       this.setState({vendor:[...arr1]})
+                   })
+                   
                   
                   break;
             case "Oneplus":console.log("Working b");
                 console.log("Working OnePlus");
-                var arr1=[]
+                var arr=[]
                   this.props.nord.map((value,i)=>{
-                        arr1.push(value);
+                        arr.push(value);
                        
                   })
-                  console.log("The arr1 is "+arr1);
-                  arr1.map((x,i)=> ( document.getElementById(`${i}`).innerHTML=`${x}`))
+                //   console.log("The arr1 is "+arr1);
+                //   arr1.map((x,i)=> ( document.getElementById(`${i}`).innerHTML=`${x}`))
                 //   this.setState({list:[...arr1]})
                 //   arr1.map((x,index)=> document.getElementById("second_list").innerHTML=x)
-                  console.log("The Oneplus is"+this.state.oneplus)
+                var arr1=[...this.state.vendor]
+                arr1.map((x)=>{
+                    if(x.id == this.state.ID){
+                        x.test=arr;
+                        console.log("The x.test is "+x.test)
+                    }
+                    this.setState({vendor:[...arr1]})
+                })
                   break;
             case "Nokia":console.log("Working c");
             console.log("Working OnePlus");
@@ -64,9 +77,17 @@ class ItemsNeededCard extends Component {
                     arr.push(value);
                     
               })
-              console.log("The arr1 is "+arr);
-              this.setState({list:[...arr]})
-              console.log("The Oneplus is"+this.state.Nokia)
+              var arr1=[...this.state.vendor]
+                   arr1.map((x)=>{
+                       if(x.id == this.state.ID){
+                           x.test=arr;
+                           console.log("The x.test is "+x.test)
+                       }
+                       this.setState({vendor:[...arr1]})
+                   })
+            //   console.log("The arr1 is "+arr);
+            //   this.setState({list:[...arr]})
+            //   console.log("The Oneplus is"+this.state.Nokia)
             //   arr.map((x,i)=> ( document.getElementById(`${i}`).innerHTML=`${x}`))
               break;
             case "Samsung": console.log("Working c");
@@ -76,9 +97,17 @@ class ItemsNeededCard extends Component {
                     arr.push(value);
                     
               })
-              console.log("The arr1 is "+arr);
-              this.setState({list:[...arr]})
-              console.log("The Oneplus is"+this.state.Samsung)
+              var arr1=[...this.state.vendor]
+                   arr1.map((x)=>{
+                       if(x.id == this.state.ID){
+                           x.test=arr;
+                           console.log("The x.test is "+x.test)
+                       }
+                       this.setState({vendor:[...arr1]})
+                   })
+            //   console.log("The arr1 is "+arr);
+            //   this.setState({list:[...arr]})
+            //   console.log("The Oneplus is"+this.state.Samsung)
             //   arr.map((x,i)=> ( document.getElementById(`${i}`).innerHTML=`${x}`))
               break;
               default: console.log("Wrong Choice")
@@ -166,10 +195,10 @@ class ItemsNeededCard extends Component {
                                 </thead>
                                 <tbody >
                                     {this.state.vendor.map((value,index)=>(
-                                        <tr onClick={()=>this.KeyTeller(`${value.id}`)} key={value.id}>
+                                        <tr  key={value.id}>
                                             <td width="10">{index+1}</td>
                                             <td width="300">
-                                            <Form.Group  onChange={this.handleSelect} as={Col} md="10" controlId="exampleForm.SelectCustomSizeSm">
+                                            <Form.Group onClick={()=>this.KeyTeller(`${value.id}`)}  onChange={this.handleSelect} as={Col} md="10" controlId="exampleForm.SelectCustomSizeSm">
                                             <Form.Control  as="select" size="sm" custom>
                                                 
                                                 {
@@ -192,8 +221,10 @@ class ItemsNeededCard extends Component {
                                             <option id="1" ></option>
                                             <option id="2" ></option>
                                             <option id="3" ></option> */}
-                                             
-                                           
+                                             {value.test.map((x,i)=>(
+                                                 <option key={i+100}>{x.trim()!=""?x:0}</option>
+                                             ))}
+                                           {value.test.map((x)=>console.log("The value of Test from Each row is: "+x))}
                                             {/* <option>{ Object.values(Object.keys(value).find(key=>key===this.state.companyName)).map(x=>x) }</option> */}
                                               {/* {this.state.list.map((data)=>{
                                                    console.log(data);
