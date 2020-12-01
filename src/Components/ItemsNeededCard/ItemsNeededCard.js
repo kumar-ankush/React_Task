@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { Card, Table,Col,Row,Form, Button } from 'react-bootstrap';
+import { Card, Table,Col,Row,Form, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import './ItemsNeededCard.css';
 class ItemsNeededCard extends Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state={ user:{name:"",email:"",phone:"",address:""},errors:{},
             ID:"",
-            description:[{id:"",name:"Apple",data:[]},
-            {id:"",name:"Oneplus",data:[]},
-            {id:"",name:"Nokia",data:[]},
-            {id:"",name:"Samsung",data:[]}],
             companyName:"",
             vendor:[
                 {id:Math.random()*100000,Ordered:11,Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
@@ -25,8 +21,47 @@ class ItemsNeededCard extends Component {
             Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],test:[]}],
         list:["Select","Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"]
     }
-        this.handleSelect = this.handleSelect.bind(this);
+      
       }
+
+      isValid = () => {
+        const errors = {};
+        if (this.state.user.name.trim() === "") {
+            errors.name = "Invalid";
+          }
+            if (this.state.user.email.trim() === "") {
+                errors.email = "Invalid";
+              }
+              
+              if (this.state.user.phone.trim() === "") {
+                errors.phone = "Invalid";
+              }
+             
+              if (this.state.user.address.trim() === "") {
+                errors.address = "Invalid";
+              }
+              return Object.keys(errors).length === 0 ? null : errors;
+      };
+      changeHandler = (event) => {
+        //   console.log("The OnChnage is working")
+        const user = { ...this.state.user };
+        console.log(event.target.name)
+        console.log(event.target.value)
+        user[event.target.name] = event.target.value;
+        this.setState({ user });
+        console.log(this.state)
+      };
+      submitHandler=(event)=>{
+        event.preventDefault();
+        const errors = this.isValid();
+        console.log(errors);
+        if(errors){
+            this.setState({ errors });
+            return
+        }
+        console.log("Call the Server");
+    }
+
       handleSelect=(event)=>{
         // console.log("The Event value is "+event.target.value);
         this.setState({companyName:event.target.value})
@@ -38,7 +73,6 @@ class ItemsNeededCard extends Component {
                     this.props.steve.map((value,i)=>{
                           arr.push(value);   
                     })
-                    // arr.map((x,i)=> (document.getElementById(`${i}`).innerHTML=x))
                     var arr1=[...this.state.vendor]
                    arr1.map((x)=>{
                        if(x.id == this.state.ID){
@@ -46,9 +80,7 @@ class ItemsNeededCard extends Component {
                            console.log("The x.test is "+x.test)
                        }
                        this.setState({vendor:[...arr1]})
-                   })
-                   
-                  
+                   })  
                   break;
             case "Oneplus":console.log("Working b");
                 console.log("Working OnePlus");
@@ -57,10 +89,6 @@ class ItemsNeededCard extends Component {
                         arr.push(value);
                        
                   })
-                //   console.log("The arr1 is "+arr1);
-                //   arr1.map((x,i)=> ( document.getElementById(`${i}`).innerHTML=`${x}`))
-                //   this.setState({list:[...arr1]})
-                //   arr1.map((x,index)=> document.getElementById("second_list").innerHTML=x)
                 var arr1=[...this.state.vendor]
                 arr1.map((x)=>{
                     if(x.id == this.state.ID){
@@ -85,10 +113,6 @@ class ItemsNeededCard extends Component {
                        }
                        this.setState({vendor:[...arr1]})
                    })
-            //   console.log("The arr1 is "+arr);
-            //   this.setState({list:[...arr]})
-            //   console.log("The Oneplus is"+this.state.Nokia)
-            //   arr.map((x,i)=> ( document.getElementById(`${i}`).innerHTML=`${x}`))
               break;
             case "Samsung": console.log("Working c");
             console.log("Working OnePlus");
@@ -105,10 +129,7 @@ class ItemsNeededCard extends Component {
                        }
                        this.setState({vendor:[...arr1]})
                    })
-            //   console.log("The arr1 is "+arr);
-            //   this.setState({list:[...arr]})
-            //   console.log("The Oneplus is"+this.state.Samsung)
-            //   arr.map((x,i)=> ( document.getElementById(`${i}`).innerHTML=`${x}`))
+     
               break;
               default: console.log("Wrong Choice")
               break;
@@ -120,11 +141,27 @@ class ItemsNeededCard extends Component {
         this.setState({ID})
         console.log("The ID is : "+this.state.ID)
       }
+      Add=()=>{
+        const vendor=[...this.state.vendor]
+        vendor.push({id:Math.random()*100000,Ordered:11,Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
+        Oneplus:["OnePlus Nord 5G","OnePlus 5","OnePlus 6","OnePlus 7T"],
+        Nokia:["Nokia 255 4G","Nokia 215 4G","Nokia C3","Nokia 701"],
+        Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],test:[]})
+        this.setState({vendor})
+      }
+      Remove=()=>{
+          console.log("Remove active")
+        const vendor=[...this.state.vendor]
+        console.log(vendor)
+        vendor.pop()
+        this.setState({vendor})
+      }
     
     render() {
         
         return (
             <div className="ItemsNeededCard">
+                <Form onSubmit={this.submitHandler}>
                 <Card  style={{ width: '68rem' }}> 
                     <div className="Heading">
                         <h5>Items Needed</h5>
@@ -160,26 +197,40 @@ class ItemsNeededCard extends Component {
                     <Row>
                         <Col sm={6}>
                         <div className="form_container">
+                            
                                    <Form.Group  as={Col} md="8" controlId="formBasicName">
                                     <Form.Label>Name</Form.Label>
-                                        <Form.Control type="text" placeholder="Enter Full Name" />
+                                        <Form.Control onChange={this.changeHandler} name="name" type="text" placeholder="Enter Full Name" />
                                         <Form.Text className="text-muted">
                                         </Form.Text>
+                                        {this.state.errors.name && (
+                                        <Alert variant="danger">{this.state.errors.name}</Alert>
+                                        )}
                                     </Form.Group>
                                     <Form.Group as={Col} md="8" controlId="formBasicEmail">
                                     <Form.Label>E-Mail</Form.Label>
-                                    <Form.Control   type="email" placeholder="Enter your Email" />
+                                    <Form.Control onChange={this.changeHandler} name="email"  type="email" placeholder="Enter your Email" />
+                                    {this.state.errors.email && (
+                                        <Alert variant="danger">{this.state.errors.email}</Alert>
+                                        )}
                                     </Form.Group>
                                     <Form.Group  as={Col} md="8" controlId="formBasicName">
                                     <Form.Label>Phone</Form.Label>
-                                        <Form.Control type="text" placeholder="Enter Phone Number" />
+                                        <Form.Control onChange={this.changeHandler} name="phone" type="text" placeholder="Enter Phone Number" />
                                         <Form.Text className="text-muted">
                                         </Form.Text>
+                                        {this.state.errors.phone && (
+                                        <Alert variant="danger">{this.state.errors.phone}</Alert>
+                                        )}
                                     </Form.Group>
                                     <Form.Group as={Col} md="8" controlId="formGridAddress1">
                                     <Form.Label>Address</Form.Label>
-                                    <Form.Control placeholder="1234 Main St" />
+                                    <Form.Control onChange={this.changeHandler} name="address" placeholder="1234 Main St" />
+                                    {this.state.errors.address && (
+                            <Alert variant="danger">{this.state.errors.address}</Alert>
+                            )}
                                     </Form.Group>
+                               
                         </div>
                         </Col>
                         <Col sm={6} id="Col2">
@@ -203,7 +254,6 @@ class ItemsNeededCard extends Component {
                                                 
                                                 {
                                                     this.props.annoying.map((x)=>
-                                                        // <option onClick={()=>this.props.List(this.state.companyName)} id={x.id} key={x.id}>{x.value}</option>
                                                         <option  id={x.id} key={x.id}>{x.value}</option>
                                                     )
                                                 }
@@ -212,25 +262,11 @@ class ItemsNeededCard extends Component {
                                             </td>
                                             <td width="540">
                                             <Form.Group as={Col} md="10" controlId="exampleForm.SelectCustomSizeSm">
-                                            <Form.Control  as="select" size="sm" custom>
-                                           { this.props.annoying.map((x,i)=>
-                                           <option id={i} value="0"></option>
-                                           )}
-                                            
-                                            {/* <option id="0" ></option>
-                                            <option id="1" ></option>
-                                            <option id="2" ></option>
-                                            <option id="3" ></option> */}
+                                            <Form.Control  as="select"  size="sm" custom>
                                              {value.test.map((x,i)=>(
                                                  <option key={i+100}>{x.trim()!=""?x:0}</option>
                                              ))}
                                            {value.test.map((x)=>console.log("The value of Test from Each row is: "+x))}
-                                            {/* <option>{ Object.values(Object.keys(value).find(key=>key===this.state.companyName)).map(x=>x) }</option> */}
-                                              {/* {this.state.list.map((data)=>{
-                                                   console.log(data);
-                                                   return( <option>{data}</option>)
-                                                    
-                                                   })} */}
                                             </Form.Control>
                                             </Form.Group>
                                             </td>
@@ -245,8 +281,8 @@ class ItemsNeededCard extends Component {
                         </Table>
                         </div>
                         <div className="btn1">
-                        <Button onClick={this.props.Add}   variant="dark">+ Add Item</Button>{' '}
-                        <Button onClick={this.props.Remove} id="bttn"  variant="dark">- Remove Item</Button>{' '}
+                        <Button onClick={this.Add}   variant="dark">+ Add Item</Button>{' '}
+                        <Button onClick={this.Remove} id="bttn"  variant="dark">- Remove Item</Button>{' '}
                         </div>
                         <div className="btn2">
                         <Button  type="submit" variant="dark" size="lg"  block>{' '}
@@ -256,6 +292,7 @@ class ItemsNeededCard extends Component {
                         </Col>
                     </Row>
                 </Card>
+                </Form>
             </div>
         );
     }
@@ -275,8 +312,8 @@ const mapStateToProps=(state)=>{
 }
 const mapDispathToProps=(dispatch)=>{
     return {
-        Add:()=>dispatch({type:"Add"}),
-        Remove:()=>dispatch({type:"Remove"}),
+        // Add:()=>dispatch({type:"Add"}),
+        // Remove:()=>dispatch({type:"Remove"}),
         List:(name)=>dispatch({type:"List"})
     }
 }

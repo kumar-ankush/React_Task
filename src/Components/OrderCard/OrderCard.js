@@ -5,59 +5,112 @@ import './OrderCard.css';
 class OrderCard extends Component {
     constructor(props){
         super(props);
-        this.state={user:{name:"",email:"",phone:"",payment:"",address:""},errors:{},
-        row:[{id:Math.random()*1000000000, 
-            heading:["Select","Iphone 12 Pro","Iphone 12","Iphone 12 Pro Max " ,"Iphone 11 pro max","Iphone 11"], 
-            basePrice:[0,119990,79900,129900,108609,50999],price:0,quantity:0,discount:20}]};
-        
+        this.state={Cuser:{cname:"",email:"",phone:"",payment:"",address:""},errors:{},rowID:"",
+        row:[{id:Math.random()*1000000000, name:"",
+            heading:[{name:"Select",cost:0},{name:"Iphone 12 Pro",cost:119990},
+            {name:"Iphone 12",cost:79900},{name:"Iphone 12 Pro Max ",cost:129900} ,{name:"Iphone 11 pro max",cost:108609},{name:"Iphone 11",cost:50999}], 
+            price:0,quantity:0,discount:20},]
+        };
+
     }
     isValid = () => {
         const errors = {};
-        if (this.state.user.name.trim() === "") {
+        if (this.state.Cuser.cname.trim() === "") {
             errors.name = "Invalid";
           }
-            if (this.state.user.email.trim() === "") {
+            if (this.state.Cuser.email.trim() === "") {
                 errors.email = "Invalid";
               }
               
-              if (this.state.user.phone.trim() === "") {
+              if (this.state.Cuser.phone.trim() === "") {
                 errors.phone = "Invalid";
               }
-              if (this.state.user.payment.trim() === "") {
+              if (this.state.Cuser.payment.trim() === "") {
                 errors.payment = "Invalid";
               }
-              if (this.state.user.address.trim() === "") {
+              if (this.state.Cuser.address.trim() === "") {
                 errors.address = "Invalid";
               }
               return Object.keys(errors).length === 0 ? null : errors;
       };
       changeHandler = (event) => {
-          console.log("The OnChnage is working")
-        const user = { ...this.state.user };
-        user[event.target.name] = event.target.value;
-        this.setState({ user });
+        //   console.log("The OnChnage is working")
+        const Cuser = { ...this.state.Cuser };
+        console.log(event.target.name)
+        console.log(event.target.value)
+        Cuser[event.target.name] = event.target.value;
+        this.setState({ Cuser });
         console.log(this.state)
       };
-      valuechangeHandler=(event)=>{
-        console.log("The OnChnage value is working")
-        this.state.row.map((x,i)=>{
-            const row1 = { ...x };
-            row1[event.target.name] = event.target.value;
-            this.setState({ row:[row1] });
-        })
-        
-      }
-    submitHandler=(event)=>{
+      submitHandler=(event)=>{
         event.preventDefault();
         const errors = this.isValid();
         console.log(errors);
-        this.setState({ errors });
-        if (errors) return;
+        if(errors){
+            this.setState({ errors });
+            return
+        }
         console.log("Call the Server");
     }
+
+      valuechangeHandler=(event)=>{
+        console.log("The OnChnage value is working")
+        const row=[ ...this.state.row ]
+       row.map((x)=>{
+            // const row1 = { ...x };
+            console.log(this.state.rowID)
+            console.log(x.id)
+            if(this.state.rowID==x.id){
+                console.log(event.currentTarget.name)
+                console.log(x.id)
+            // row1[event.currentTarget.name] = event.currentTarget.value;
+            x[event.target.name] = event.target.value;
+            
+            console.log("Row from change handler: ")
+            console.log(this.state.row)
+            this.setState({ row });
+            }
+        })
+        
+      }
+      rowDetect=(event)=>{
+        this.setState({rowID:event.currentTarget.id})
+        // console.log("Row detect")
+        // console.log(this.state.row)
+ // console.log(event.currentTarget.id)
+     }
     datalistHandler=(event)=>{
-        console.log(event.target.value)
+        const row=[...this.state.row]
+        this.state.row.map((value)=>{
+            if(this.state.rowID==value.id)
+           {
+            value.heading.map((val,i)=>{
+                if(event.target.value== val.name){
+                    value.price=val.cost;
+                    value.name=event.target.value
+                }
+            })
+           }
+        })
+        this.setState({row})        
     }
+    addRowHandler=()=>{
+        const row=[...this.state.row]
+        row.push({id:Math.random()*1000000000, 
+            heading:[{name:"Select",cost:0},{name:"Iphone 12 Pro",cost:119990},
+            {name:"Iphone 12",cost:79900},{name:"Iphone 12 Pro Max ",cost:129900} ,{name:"Iphone 11 pro max",cost:108609},{name:"Iphone 11",cost:50999}], 
+            price:0,quantity:0,discount:20})
+            this.setState({row})
+    }
+    deleteHandler=()=>{
+        console.log("Active")
+        const row=[...this.state.row]
+        console.log(this.state.row)
+        row.pop()
+        console.log(row)
+        this.setState({row})
+    }
+   
     render() {
         return (
             <div className="Outer_Container">
@@ -71,7 +124,7 @@ class OrderCard extends Component {
                                     <Form.Label>Name</Form.Label>
                                         <Form.Control  
                                         onChange={this.changeHandler} 
-                                        name="name"  
+                                        name="cname"  
                                         type="text" 
                                         placeholder="Enter Full Name" />
                                         {this.state.errors.name && (
@@ -82,7 +135,7 @@ class OrderCard extends Component {
                                     <Form.Group as={Col} md="8" controlId="formBasicEmail">
                                     <Form.Label>E-Mail</Form.Label>
                                     <Form.Control 
-                                    value={this.state.user.email} 
+                                    value={this.state.Cuser.email} 
                                     onChange={this.changeHandler}
                                     name="email"  
                                     type="email" 
@@ -93,7 +146,7 @@ class OrderCard extends Component {
                                     </Form.Group>
                                     <Form.Group as={Col} md="8" controlId="formBasicPassword">
                                     <Form.Label>Phone</Form.Label>
-                                    <Form.Control value={this.state.user.phone} onChange={this.changeHandler} name="phone" type="text" placeholder="Enter Phone Number" />
+                                    <Form.Control value={this.state.Cuser.phone} onChange={this.changeHandler} name="phone" type="text" placeholder="Enter Phone Number" />
                                     {this.state.errors.phone && (
                                         <Alert variant="danger">{this.state.errors.phone}</Alert>
                                         )}
@@ -107,8 +160,7 @@ class OrderCard extends Component {
                                 onChange={this.changeHandler}
                                 type="radio"
                                 name="payment"
-                                // name="formHorizontalRadios"
-                                id="formHorizontalRadios1"
+                                id="formHorizontalRadios"
                                 label="Online"
                             />
                             <Form.Check
@@ -116,7 +168,7 @@ class OrderCard extends Component {
                                 type="radio"
                                 name="payment"
                                 // name="formHorizontalRadios"
-                                id="formHorizontalRadios2"
+                                id="formHorizontalRadios"
                                 label="Cash"
                             />
                             {this.state.errors.payment && (
@@ -125,7 +177,7 @@ class OrderCard extends Component {
                             </div>
                            <Form.Group as={Col} md="10" controlId="formGridAddress1">
                             <Form.Label>Address</Form.Label>
-                            <Form.Control value={this.state.user.address} onChange={this.changeHandler} name="address" as="textarea" rows={5} placeholder="Hint Text" />
+                            <Form.Control value={this.state.Cuser.address} onChange={this.changeHandler} name="address" as="textarea" rows={5} placeholder="Hint Text" />
                             {this.state.errors.address && (
                             <Alert variant="danger">{this.state.errors.address}</Alert>
                             )}
@@ -148,19 +200,18 @@ class OrderCard extends Component {
                                 <tbody >
                                 
                                     {this.state.row.map((value,index)=>(
-                                        <tr >
+                                        <tr id={value.id} key={value.id} onClick={this.rowDetect}>
                                             <td width="10">{index+1}</td>
                                             <td width="210" >
                                                 
                                             <Form.Group onChange={this.datalistHandler} as={Col} md="12" controlId="exampleForm.SelectCustomSizeSm">
                                             
                                             <Form.Control as="select" size="sm" custom>
-                                                {/* { this.props.list.map((val,index) =>(
-                                                    <option>{val.itemName}</option>
-                                                ))} */}
+                                              
                                                 {
                                                     value.heading.map((val,i)=>(
-                                                    <option>{val}</option>
+                                                    // <option onClick={this.idDetect} id={i}>{val}</option>
+                                                    <option >{val.name}</option>
                                                     ))
                                                 }
                                             </Form.Control>
@@ -183,7 +234,7 @@ class OrderCard extends Component {
                                                 {/* <h6>30%</h6> */}
                                                 </td>
                                             <td width="180"><Form.Group as={Col} md="10">
-                                                <Form.Control  size="sm" value={value.price*value.quantity*(value.discount/100)} type="text" placeholder="Total" />
+                                                <Form.Control  size="sm" value={value.price*value.quantity-(value.price*value.quantity*(value.discount/100))} type="text" placeholder="Total" />
                                                 </Form.Group></td>
                                                 </tr>
                                     ))
@@ -195,22 +246,35 @@ class OrderCard extends Component {
                             
                         </Row>
                         <div className="addItem">
-                        <Button  type="submit" variant="dark">+ Add Item</Button>{' '}
+                            <div className="btn1">
+                            <Button  onClick={this.addRowHandler} variant="dark">+ Add Item</Button>{' '}
+                            </div>
+                        
+                        <div className="btn1">
+                        <Button  onClick={this.deleteHandler} variant="dark">+ Delete Item</Button>
+                            </div>
+                        
                         </div>
                         <div className="placeOrder">
-                        <Button type="submit" variant="dark" size="lg" active>
+                        <Button onClick={()=>this.props.change(this.state.Row)} type="submit" variant="dark" size="lg" active>
                             Place Order
                         </Button>
                         </div>
                         </Form>
+                        {/* {console.log(this.props.list)} */}
                 </Card>
             </div>
         );
     }
 }
-const mapStateToProps=(state)=>{
+// const mapStateToProps=(state)=>{
+//     return{
+//         list:state.Cuser
+//     }
+// }
+const mapDispatchToProps=(dispath)=>{
     return{
-        list:state.itemList
+        change: (val)=> dispath({type:"stateTransfer",value:val})
     }
 }
-export default connect(mapStateToProps)( OrderCard);
+export default connect(mapDispatchToProps)( OrderCard);
