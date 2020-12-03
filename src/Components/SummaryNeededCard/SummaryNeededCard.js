@@ -5,20 +5,24 @@ import './SummaryNeededCard.css';
 class SummaryNeededCard extends Component {
     constructor(props) {
         super(props);
-        this.state={id:"",obj:{Add:"NA",Customer_Name:"NA",Order_Detail:"NA",phone:"NA",status:"NA"},
+        this.state={id:"",status:false,obj:{Add:"",Customer_Name:"",Order_Detail:"",phone:"",status:""},
         heading:{Address:"Address",Customer_Name:"Customer Name",Order_Details:"Order Details",Phone:"Phone",Status:"Status"}}
         this.handleClick = this.handleClick.bind(this);
       }
       handleClick(event) {
+                        const status=true;
                         this.setState({id:event.currentTarget.id})
                         const data=this.props.detail.filter(value=> 
                         {
                             if(value.id== event.currentTarget.id)
-                                {this.setState({obj:value})
-                                console.log("If statement worked") }
+                                {   this.setState({status})
+                                    this.setState({obj:value})
+                                    
+                                }
+                                // console.log("If statement worked") }
                         })
        
-        console.log(this.state.obj);
+        // console.log(this.state.obj);
       }
     render() {
         return (
@@ -38,6 +42,16 @@ class SummaryNeededCard extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                            {/* {this.props.detail.map((val,index)=>(
+                                <tr key={val.id} id={val.id} onClick={this.handleClick}>
+                                    <td  width="130">{val.Order_No}</td>
+                                    <td  width="160">{val.Customer_Name}</td>
+                                    <td  width="160">{val.Order_Detail}</td>
+                                    <td  width="160">{val.phone}</td>
+                                    <td  width="260">{val.Add}</td>
+                                    <td >{val.status}</td>
+                                </tr>
+                            ))} */}
                             {this.props.detail.map((val,index)=>(
                                 <tr key={val.id} id={val.id} onClick={this.handleClick}>
                                     <td  width="130">{val.Order_No}</td>
@@ -53,18 +67,14 @@ class SummaryNeededCard extends Component {
                 </Card>
 
                 <div className="second_container">
-                    <Card style={{ width: '68rem' }}>
+
+                   {this.state.status?( <Card style={{ width: '68rem' }}>
                                  <div className="insideCard_Container">
                                      <Row >
                                          <Col>
                                                 <div><h2>{this.state.obj.Order_No}</h2></div>
                                          </Col>
                                      </Row>
-                                {/* <Row><Col sm={2}><div><h6>Address</h6></div></Col> <Col sm={2}>{this.state.obj.Add}</Col> </Row>
-                                <Row><Col sm={2}><div><h6>Customer Name</h6></div></Col ><Col sm={2}>{this.state.obj.Customer_Name}</Col></Row>
-                                <Row><Col sm={2}><div><h6>Order Details</h6></div></Col><Col sm={2}>{this.state.obj.Order_Detail}</Col></Row>
-                                <Row><Col sm={2}><div><h6>Phone</h6></div></Col><Col sm={2}>{this.state.obj.phone}</Col></Row>
-                                <Row><Col sm={2}><div><h6>Status</h6></div></Col><Col sm={2}>{this.state.obj.status}</Col></Row> */}
                                  <Row ><Col sm={2}><div><h6>{this.state.heading.Address}</h6></div></Col> <Col sm={2}>{this.state.obj.Add}</Col> </Row>
                                 <Row ><Col sm={2}><div><h6>{this.state.heading.Customer_Name}</h6></div></Col ><Col sm={2}>{this.state.obj.Customer_Name}</Col></Row>
                                 <Row ><Col sm={2}><div><h6>{this.state.heading.Order_Details}</h6></div></Col><Col sm={2}>{this.state.obj.Order_Detail}</Col></Row>
@@ -72,7 +82,7 @@ class SummaryNeededCard extends Component {
                                 <Row ><Col sm={2}><div><h6>{this.state.heading.Status}</h6></div></Col><Col sm={2}>{this.state.obj.status}</Col></Row>
                                 
                                  </div>
-                    </Card>
+                    </Card>):" "}
 
                 </div>
             </div>
@@ -80,6 +90,7 @@ class SummaryNeededCard extends Component {
     }
 }
 const mapStateToProps=(state)=>{
-    return {detail:state.summary};
+    return {detail:state.summary,
+            User:state.user};
 };
 export default connect(mapStateToProps) (SummaryNeededCard);

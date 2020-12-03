@@ -6,10 +6,13 @@ class OrderCard extends Component {
     constructor(props){
         super(props);
         this.state={Cuser:{cname:"",email:"",phone:"",payment:"",address:""},errors:{},rowID:"",
-        row:[{id:Math.random()*1000000000, name:"",
-            heading:[{name:"Select",cost:0},{name:"Iphone 12 Pro",cost:119990},
-            {name:"Iphone 12",cost:79900},{name:"Iphone 12 Pro Max ",cost:129900} ,{name:"Iphone 11 pro max",cost:108609},{name:"Iphone 11",cost:50999}], 
-            price:0,quantity:0,discount:20},]
+        row:[{id:Math.random()*1000000000, price:"",itemName:"",
+            heading:[{name:"Select",cost:0},{name:"Iphone 12 ProMax",cost:129900},{name:"Iphone 12 Pro",cost:119990},
+            {name:"Iphone 12",cost:79900},{name:"Iphone 11 pro max",cost:108609} ,{name:"Iphone 11",cost:50999},{name:"OnePLus Nord 5G",cost:60000},
+            {name:"OnePlus 5",cost:55000},{name:"OnePlus 6",cost:65000},{name:"OnePlus 7T",cost:70000},{name:"Nokia 255 4G",cost:6000},
+            {name:"Nokia 215 4G",cost:5000},{name:"Nokia C3",cost:4000},{name:"Nokia 701",cost:2000},{name:"Samsung Galaxy M21",cost:21000},
+            {name:"Samsung Galaxy M31",cost:23000},{name:"Samsung Galaxy M51",cost:26000},{name:"Samsung Galaxy S20",cost:159900}], 
+            price:0,quantity:0,discount:20,InStock:20},]
         };
 
     }
@@ -36,11 +39,11 @@ class OrderCard extends Component {
       changeHandler = (event) => {
         //   console.log("The OnChnage is working")
         const Cuser = { ...this.state.Cuser };
-        console.log(event.target.name)
-        console.log(event.target.value)
+        // console.log(event.target.name)
+        // console.log(event.target.value)
         Cuser[event.target.name] = event.target.value;
         this.setState({ Cuser });
-        console.log(this.state)
+        // console.log(this.state)
       };
       submitHandler=(event)=>{
         event.preventDefault();
@@ -50,6 +53,15 @@ class OrderCard extends Component {
             this.setState({ errors });
             return
         }
+        const row=[...this.state.row]
+        row.map((value)=>{
+            if(this.state.ID==value.id)
+            {
+                value.price=document.getElementsByName("total")[0].value;
+            }
+        })
+        this.setState({row})
+        console.log(this.state.row)
         console.log("Call the Server");
     }
 
@@ -58,16 +70,16 @@ class OrderCard extends Component {
         const row=[ ...this.state.row ]
        row.map((x)=>{
             // const row1 = { ...x };
-            console.log(this.state.rowID)
-            console.log(x.id)
+            // console.log(this.state.rowID)
+            // console.log(x.id)
             if(this.state.rowID==x.id){
-                console.log(event.currentTarget.name)
-                console.log(x.id)
+                // console.log(event.currentTarget.name)
+                // console.log(x.id)
             // row1[event.currentTarget.name] = event.currentTarget.value;
             x[event.target.name] = event.target.value;
             
-            console.log("Row from change handler: ")
-            console.log(this.state.row)
+            // console.log("Row from change handler: ")
+            // console.log(this.state.row)
             this.setState({ row });
             }
         })
@@ -75,9 +87,7 @@ class OrderCard extends Component {
       }
       rowDetect=(event)=>{
         this.setState({rowID:event.currentTarget.id})
-        // console.log("Row detect")
-        // console.log(this.state.row)
- // console.log(event.currentTarget.id)
+       
      }
     datalistHandler=(event)=>{
         const row=[...this.state.row]
@@ -87,7 +97,7 @@ class OrderCard extends Component {
             value.heading.map((val,i)=>{
                 if(event.target.value== val.name){
                     value.price=val.cost;
-                    value.name=event.target.value
+                    value.itemName=event.target.value
                 }
             })
            }
@@ -96,10 +106,13 @@ class OrderCard extends Component {
     }
     addRowHandler=()=>{
         const row=[...this.state.row]
-        row.push({id:Math.random()*1000000000, 
-            heading:[{name:"Select",cost:0},{name:"Iphone 12 Pro",cost:119990},
-            {name:"Iphone 12",cost:79900},{name:"Iphone 12 Pro Max ",cost:129900} ,{name:"Iphone 11 pro max",cost:108609},{name:"Iphone 11",cost:50999}], 
-            price:0,quantity:0,discount:20})
+        row.push({id:Math.random()*1000000000, price:"",itemName:"",
+        heading:[{name:"Select",cost:0},{name:"Iphone 12 ProMax",cost:129900},{name:"Iphone 12 Pro",cost:119990},
+        {name:"Iphone 12",cost:79900},{name:"Iphone 11 pro max",cost:108609} ,{name:"Iphone 11",cost:50999},{name:"OnePLus Nord 5G",cost:60000},
+        {name:"OnePlus 5",cost:55000},{name:"OnePlus 6",cost:65000},{name:"OnePlus 7T",cost:70000},{name:"Nokia 255 4G",cost:6000},
+        {name:"Nokia 215 4G",cost:5000},{name:"Nokia C3",cost:4000},{name:"Nokia 701",cost:2000},{name:"Samsung Galaxy M21",cost:21000},
+        {name:"Samsung Galaxy M31",cost:23000},{name:"Samsung Galaxy M51",cost:26000},{name:"Samsung Galaxy S20",cost:159900}], 
+        price:0,quantity:0,discount:20,InStock:20})
             this.setState({row})
     }
     deleteHandler=()=>{
@@ -110,7 +123,17 @@ class OrderCard extends Component {
         console.log(row)
         this.setState({row})
     }
-   
+    totalHandler=(event)=>{
+        console.log("The price is : "+event.target.value)
+        const row=[...this.state.row]
+        row.map((value)=>{
+            if(this.state.ID==value.id)
+            {
+                value.price=event.target.value
+            }
+        })
+        this.setState({row})
+    }
     render() {
         return (
             <div className="Outer_Container">
@@ -233,8 +256,8 @@ class OrderCard extends Component {
                                                 </Form.Group>
                                                 {/* <h6>30%</h6> */}
                                                 </td>
-                                            <td width="180"><Form.Group as={Col} md="10">
-                                                <Form.Control  size="sm" value={value.price*value.quantity-(value.price*value.quantity*(value.discount/100))} type="text" placeholder="Total" />
+                                            <td width="180"><Form.Group onSubmit={this.totalHandler} as={Col} md="10">
+                                                <Form.Control  size="sm" name="total" value={value.price*value.quantity-(value.price*value.quantity*(value.discount/100))} type="text" placeholder="Total" />
                                                 </Form.Group></td>
                                                 </tr>
                                     ))
@@ -256,12 +279,12 @@ class OrderCard extends Component {
                         
                         </div>
                         <div className="placeOrder">
-                        <Button onClick={()=>this.props.change(this.state.Row)} type="submit" variant="dark" size="lg" active>
+                        <Button onClick={()=>this.props.change(this.state.row)} type="submit" variant="dark" size="lg" active>
                             Place Order
                         </Button>
                         </div>
                         </Form>
-                        {/* {console.log(this.props.list)} */}
+                       
                 </Card>
             </div>
         );
@@ -272,9 +295,9 @@ class OrderCard extends Component {
 //         list:state.Cuser
 //     }
 // }
-const mapDispatchToProps=(dispath)=>{
+const mapDispatchToProps=(dispatch)=>{
     return{
-        change: (val)=> dispath({type:"stateTransfer",value:val})
+        change: (state)=> dispatch({type:"stateTransfer",value:[...state]})
     }
 }
-export default connect(mapDispatchToProps)( OrderCard);
+export default connect(null,mapDispatchToProps)( OrderCard);

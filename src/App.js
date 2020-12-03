@@ -13,7 +13,6 @@ function App() {
     <BrowserRouter>
    <div>
      <Sidebar_Container />
-    
    </div>
    </BrowserRouter>
   );

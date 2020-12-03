@@ -9,17 +9,24 @@ class ItemsNeededCard extends Component {
             ID:"",
             companyName:"",
             vendor:[
-                {id:Math.random()*100000,Ordered:11,Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
+                {id:Math.random()*100000,Ordered:"",Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
             Oneplus:["OnePlus Nord 5G","OnePlus 5","OnePlus 6","OnePlus 7T"],
             Nokia:["Nokia 255 4G","Nokia 215 4G","Nokia C3","Nokia 701"],
-            Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],test:[]},
+            Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],
+            selectName:"",productName:"",price:"",test:[],Order_No:"F"+Math.random().toString().concat("0".repeat(3)).substr(2,3)},
         
         
-            {id:Math.random()*100000,Ordered:11,Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
+            {id:Math.random()*100000,Ordered:"",Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
             Oneplus:["OnePlus Nord 5G","OnePlus 5","OnePlus 6","OnePlus 7T"],
             Nokia:["Nokia 255 4G","Nokia 215 4G","Nokia C3","Nokia 701"],
-            Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],test:[]}],
-        list:["Select","Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"]
+            Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],
+            selectName:"",productName:"",price:"",test:[],Order_No:"F"+Math.random().toString().concat("0".repeat(3)).substr(2,3)}
+        ],
+        list:["Select","Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
+        //The Summary of Reducer, for reference
+        summary:[{id:Math.random()*1000000,Order_No:"F102",Customer_Name:"Ankush Kumar",
+        Order_Detail:"iPhone 11 Pro Max",
+        phone:9865342712,Add:"ABC Square,New york",status:"Shipped"},]
     }
       
       }
@@ -43,14 +50,20 @@ class ItemsNeededCard extends Component {
               return Object.keys(errors).length === 0 ? null : errors;
       };
       changeHandler = (event) => {
-        //   console.log("The OnChnage is working")
         const user = { ...this.state.user };
-        console.log(event.target.name)
-        console.log(event.target.value)
         user[event.target.name] = event.target.value;
         this.setState({ user });
         console.log(this.state)
       };
+      changeProductHandler=(event)=>{
+          const vendor=[...this.state.vendor]
+          vendor.map((value)=>{
+              if(this.state.ID==value.id){
+                  value.Ordered=event.target.value;
+              }
+          })
+          this.setState({vendor})
+      }
       submitHandler=(event)=>{
         event.preventDefault();
         const errors = this.isValid();
@@ -63,12 +76,11 @@ class ItemsNeededCard extends Component {
     }
 
       handleSelect=(event)=>{
-        // console.log("The Event value is "+event.target.value);
         this.setState({companyName:event.target.value})
         console.log("The state information value is: "+this.state.companyName);
         switch(event.target.value)
         {
-            case "Apple": console.log("Working a")
+            case "Apple": 
                     var arr=[]
                     this.props.steve.map((value,i)=>{
                           arr.push(value);   
@@ -76,14 +88,14 @@ class ItemsNeededCard extends Component {
                     var arr1=[...this.state.vendor]
                    arr1.map((x)=>{
                        if(x.id == this.state.ID){
+                           x.selectName=event.target.value
                            x.test=arr;
-                           console.log("The x.test is "+x.test)
                        }
                        this.setState({vendor:[...arr1]})
+                       
                    })  
                   break;
-            case "Oneplus":console.log("Working b");
-                console.log("Working OnePlus");
+            case "Oneplus":
                 var arr=[]
                   this.props.nord.map((value,i)=>{
                         arr.push(value);
@@ -92,14 +104,13 @@ class ItemsNeededCard extends Component {
                 var arr1=[...this.state.vendor]
                 arr1.map((x)=>{
                     if(x.id == this.state.ID){
+                        x.selectName=event.target.value
                         x.test=arr;
-                        console.log("The x.test is "+x.test)
                     }
                     this.setState({vendor:[...arr1]})
                 })
                   break;
-            case "Nokia":console.log("Working c");
-            console.log("Working OnePlus");
+            case "Nokia":
              arr=[]
               this.props.nok.map((value)=>{
                     arr.push(value);
@@ -108,14 +119,13 @@ class ItemsNeededCard extends Component {
               var arr1=[...this.state.vendor]
                    arr1.map((x)=>{
                        if(x.id == this.state.ID){
+                        x.selectName=event.target.value
                            x.test=arr;
-                           console.log("The x.test is "+x.test)
                        }
                        this.setState({vendor:[...arr1]})
                    })
               break;
-            case "Samsung": console.log("Working c");
-            console.log("Working OnePlus");
+            case "Samsung": 
              arr=[]
               this.props.sam.map((value)=>{
                     arr.push(value);
@@ -124,8 +134,8 @@ class ItemsNeededCard extends Component {
               var arr1=[...this.state.vendor]
                    arr1.map((x)=>{
                        if(x.id == this.state.ID){
+                        x.selectName=event.target.value
                            x.test=arr;
-                           console.log("The x.test is "+x.test)
                        }
                        this.setState({vendor:[...arr1]})
                    })
@@ -139,14 +149,26 @@ class ItemsNeededCard extends Component {
       }
       KeyTeller=(ID)=>{
         this.setState({ID})
-        console.log("The ID is : "+this.state.ID)
+      }
+      valueHandler=(event)=>{
+         
+        const vendor=[...this.state.vendor]
+        vendor.map((value)=>{
+            if(this.state.ID==value.id)
+            {
+                value.productName=event.target.value;     
+            }
+            this.setState({vendor})
+          })
+          
       }
       Add=()=>{
         const vendor=[...this.state.vendor]
-        vendor.push({id:Math.random()*100000,Ordered:11,Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
+        vendor.push({id:Math.random()*100000,Ordered:"",Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
         Oneplus:["OnePlus Nord 5G","OnePlus 5","OnePlus 6","OnePlus 7T"],
         Nokia:["Nokia 255 4G","Nokia 215 4G","Nokia C3","Nokia 701"],
-        Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],test:[]})
+        Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],
+        selectName:"",productName:"",price:"",test:[],Order_No:"F"+Math.random().toString().concat("0".repeat(3)).substr(2,3)})
         this.setState({vendor})
       }
       Remove=()=>{
@@ -177,12 +199,13 @@ class ItemsNeededCard extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.itemDisplay.map((value,index)=>(
+
+                                {this.props.itemDisplay.map((value)=>(
                                 <tr id={value.id} key={value.id} >
                                     <td width="250" >{value.itemName}</td>
-                                    <td width="250" >{value.Ordered}</td>
+                                    <td width="250" >{value.quantity}</td>
                             <td width="250" >{value.InStock}</td>
-                            <td width="250" >{value.Ordered-value.InStock}</td>
+                            <td width="250" >{(value.quantity-value.InStock)!=0?(value.quantity-value.InStock)>0?value.quantity-value.InStock:"No Need":" "}</td>
 
                                 </tr>
                             ))}
@@ -230,7 +253,6 @@ class ItemsNeededCard extends Component {
                             <Alert variant="danger">{this.state.errors.address}</Alert>
                             )}
                                     </Form.Group>
-                               
                         </div>
                         </Col>
                         <Col sm={6} id="Col2">
@@ -246,7 +268,7 @@ class ItemsNeededCard extends Component {
                                 </thead>
                                 <tbody >
                                     {this.state.vendor.map((value,index)=>(
-                                        <tr  key={value.id}>
+                                        <tr  key={value.id} >
                                             <td width="10">{index+1}</td>
                                             <td width="300">
                                             <Form.Group onClick={()=>this.KeyTeller(`${value.id}`)}  onChange={this.handleSelect} as={Col} md="10" controlId="exampleForm.SelectCustomSizeSm">
@@ -262,21 +284,23 @@ class ItemsNeededCard extends Component {
                                             </td>
                                             <td width="540">
                                             <Form.Group as={Col} md="10" controlId="exampleForm.SelectCustomSizeSm">
-                                            <Form.Control  as="select"  size="sm" custom>
+                                            <Form.Control onClick={this.valueHandler}  as="select"  size="sm" custom>
                                              {value.test.map((x,i)=>(
-                                                 <option key={i+100}>{x.trim()!=""?x:0}</option>
+                                                 <option key={i+100}>{x}</option>
                                              ))}
-                                           {value.test.map((x)=>console.log("The value of Test from Each row is: "+x))}
                                             </Form.Control>
                                             </Form.Group>
                                             </td>
                                             <td >
-                                                 <h6>{value.Ordered}</h6> 
-                                                
+                                                 <Form.Group onClick={()=>this.KeyTeller(`${value.id}`)} as={Col} md="36" controlId="formBasicEmail">
+                                                <Form.Control onChange={this.changeProductHandler}
+                                                 name="quantity" 
+                                                 type="text" 
+                                                 placeholder="Enter" />
+                                                 </Form.Group>
                                             </td>
                                         </tr>
                                     ))}
-                                    
                                 </tbody>
                         </Table>
                         </div>
@@ -285,7 +309,7 @@ class ItemsNeededCard extends Component {
                         <Button onClick={this.Remove} id="bttn"  variant="dark">- Remove Item</Button>{' '}
                         </div>
                         <div className="btn2">
-                        <Button  type="submit" variant="dark" size="lg"  block>{' '}
+                        <Button onClick={()=>this.props.display(this.state.vendor)}  type="submit" variant="dark" size="lg"  block>{' '}
                             Place Order
                         </Button>
                         </div>
@@ -299,7 +323,8 @@ class ItemsNeededCard extends Component {
 }
 const mapStateToProps=(state)=>{
     return{
-        itemDisplay: state.itemList,
+        
+        itemDisplay: state.row,
         Org: state.vendor,
         info:state.Organisation,
         steve:state.Apple,
@@ -312,9 +337,7 @@ const mapStateToProps=(state)=>{
 }
 const mapDispathToProps=(dispatch)=>{
     return {
-        // Add:()=>dispatch({type:"Add"}),
-        // Remove:()=>dispatch({type:"Remove"}),
-        List:(name)=>dispatch({type:"List"})
+        display:(state)=>dispatch({type:"ItemsContainer",value:[...state]})
     }
 }
 export default connect(mapStateToProps,mapDispathToProps)(ItemsNeededCard);
