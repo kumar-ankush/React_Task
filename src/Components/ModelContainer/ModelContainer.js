@@ -45,7 +45,7 @@ class ModelContainer extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Sale Summary
+            Sale Invoice
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -79,7 +79,7 @@ class ModelContainer extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-          Purchase Summary
+          Purchase Invoice
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

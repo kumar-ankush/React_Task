@@ -39,7 +39,7 @@ com:[
     {id:Math.random()*1000000,Order_No:"F9908",Customer_Name:"Roberto Fermino",Order_Detail:"OnePlus 7T",phone:1265942712,Add:"AopC Square,Toronto",status:"Delivered"},
     {id:Math.random()*1000000,Order_No:"F776",Customer_Name:"Virjil Van dijk",Order_Detail:"iPhone 11 Pro ",phone:1111342712,Add:" Square,Japan",status:"Cancelled"}
 ],
-Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini"],
+Apple:["Iphone 12 Pro Max","Iphone 12 Pro","Iphone 12","Iphone 12 Mini","Iphone 11 pro max","Iphone 11"],
     Oneplus:["OnePlus Nord 5G","OnePlus 5","OnePlus 6","OnePlus 7T"],
     Nokia:["Nokia 255 4G","Nokia 215 4G","Nokia C3","Nokia 701"],
     Samsung:["Samsung Galaxy M21","Samsung Galaxy M31","Samsung Galaxy M51","Samsung Galaxy S20"],
